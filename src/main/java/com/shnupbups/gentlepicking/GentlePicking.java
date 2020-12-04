@@ -33,7 +33,7 @@ public class GentlePicking implements ModInitializer {
 		UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
 			BlockPos pos = hitResult.getBlockPos();
 			BlockState state = world.getBlockState(pos);
-			if(state.isIn(PICKABLE) && !player.shouldCancelInteraction()) {
+			if(state.isIn(PICKABLE) && !player.shouldCancelInteraction() && !player.isSpectator()) {
 				Block.dropStacks(state, world, pos);
 				world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1.0f, 1.0f);
 				world.removeBlock(pos, false);

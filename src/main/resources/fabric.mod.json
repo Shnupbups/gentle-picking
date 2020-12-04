@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "gentlepicking",
-  "version": "1.0.0",
+  "version": "${version}",
 
   "name": "Gentle Picking",
   "description": "Lets you pick up flowers with right-click.",
