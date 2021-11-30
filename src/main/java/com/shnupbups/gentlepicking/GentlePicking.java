@@ -2,6 +2,7 @@ package com.shnupbups.gentlepicking;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.tag.TagFactory;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 
 import net.minecraft.block.Block;
@@ -26,7 +27,7 @@ import net.minecraft.util.math.Vec3d;
 public class GentlePicking implements ModInitializer {
 	public static final String MOD_ID = "gentlepicking";
 
-	public static final Tag<Block> PICKABLE = TagRegistry.block(id("pickable"));
+	public static final Tag<Block> PICKABLE = TagFactory.BLOCK.create(id("pickable"));
 
 	@Override
 	public void onInitialize() {
