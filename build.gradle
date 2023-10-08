@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.10-SNAPSHOT'
+	id 'fabric-loom' version '1.4-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -10,32 +10,23 @@ archivesBaseName = project.mod_name
 version = project.mod_version + "+" + project.version_meta
 group = project.maven_group
 
-minecraft {
-}
-
 repositories {
 	maven { url "https://maven.terraformersmc.com/"}
-	maven { url "https://maven.shedaniel.me/" }
 }
 
 dependencies {
 	// Minecraft
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-
-    // Yarn
-    mappings "net.fabricmc:yarn:${project.minecraft_version}+build.${project.yarn_mappings}:v${project.tiny_version}"
-
-    // Fabric Loader
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-    // Fabric API
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fapi_version}"
-	
+	// Yarn
+	mappings "net.fabricmc:yarn:${project.minecraft_version}+build.${project.yarn_mappings}:v${project.tiny_version}"
+	// Fabric Loader
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	// Fabric API
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fapi_version}"
 	// ModMenu
-    modRuntimeOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
-	
-	// RoughlyEnoughItems
-	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+	modRuntimeOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+	// EMI
+	modRuntimeOnly "dev.emi:emi-fabric:${project.emi_version}"
 }
 
 java {
@@ -44,7 +35,6 @@ java {
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = "UTF-8"
-
 	it.options.release = 17
 }
 
@@ -61,17 +51,17 @@ jar {
 		rename { "${it}_${project.archivesBaseName}" }
 	}
 	manifest {
-        attributes([
-                "Specification-Title"     : "${mod_name}",
-                "Specification-Vendor"    : "${maven_group}",
-                "Specification-Version"   : "${mod_version}",
-                "Implementation-Title"    : "${mod_name}",
-                "Implementation-Version"  : "${mod_version}",
-                "Implementation-Vendor"   : "${maven_group}",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "${mod_name}.mixins.json"
-        ])
-    }
+		attributes([
+				"Specification-Title"     : "${mod_name}",
+				"Specification-Vendor"    : "${maven_group}",
+				"Specification-Version"   : "${mod_version}",
+				"Implementation-Title"    : "${mod_name}",
+				"Implementation-Version"  : "${mod_version}",
+				"Implementation-Vendor"   : "${maven_group}",
+				"Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+				"MixinConfigs"            : "${mod_name}.mixins.json"
+		])
+	}
 }
 
 publishing {
